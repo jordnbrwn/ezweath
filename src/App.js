@@ -35,7 +35,10 @@ class App extends Component {
             )
           );
 
-        this.interval = setInterval(this.getUpdatedConditions(url), 30000);
+        this.interval = setInterval(() => {
+          this.getUpdatedConditions(url);
+          return;
+        }, 300000);
       });
     }
   }
@@ -45,6 +48,7 @@ class App extends Component {
   }
 
   getUpdatedConditions(url) {
+    console.log("Updated");
     fetch(url)
       .then((response) => response.json())
       .then((weather) =>
