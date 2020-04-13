@@ -3,6 +3,11 @@ body {
   font-family: "Merrifweather";
 }
 
+header {
+  position: relative;
+  z-index: 999999;
+}
+
 .App {
   text-align: center;
 }
@@ -37,7 +42,8 @@ body {
 }
 
 .App.sunny,
-.App.partly-cloud {
+.App.partly-cloud,
+.App.mostly-cloudy {
   background: linear-gradient(
     180deg,
     rgba(22, 185, 245, 1) 0%,
@@ -198,6 +204,22 @@ body.back-row-toggle .rain.back-row {
   }
 }
 
+.App.mostly-cloudy:after {
+  content: "";
+  position: absolute;
+  top: -49%;
+  right: -49%;
+  width: 50%;
+  height: 70vh;
+  background: yellow;
+  border-radius: 10000px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 500px -50px;
+  opacity: 0.4;
+  box-shadow: 10px 0px 500px 300px rgba(247, 255, 0, 1);
+}
+
 .weather {
   color: #fff;
   position: absolute;
@@ -213,6 +235,78 @@ body.back-row-toggle .rain.back-row {
   margin-bottom: 0px;
   line-height: 1;
 }
+
+.weather h1 sup {
+  top: -0.2em;
+}
+
 .weather p {
   font-size: 2rem;
+}
+
+/**** Clouds ****/
+
+.clouds {
+  opacity: 0;
+  position: absolute;
+  z-index: 9999;
+}
+
+.cloud {
+  width: 600px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  z-index: 9999;
+}
+
+.overcast .cloud,
+.mostly-cloudy .cloud {
+  width: 100%;
+}
+
+.overcast .clouds,
+.mostly-cloudy .clouds {
+  opacity: 0.2;
+  top: -250px;
+  left: -20px;
+  position: absolute;
+  width: 100%;
+}
+
+.mostly-cloudy .clouds {
+  opacity: 0.8;
+}
+
+#cloud-base {
+  top: 90px;
+  height: 100px;
+  filter: url(#filter-base);
+  box-shadow: 200px 170px 19px 40px rgba(255, 255, 255, 0.9);
+}
+#cloud-back {
+  top: 90px;
+  height: 30px;
+  width: 86.2%;
+  filter: url(#filter-back);
+  box-shadow: 200px 200px 10px 40px rgba(215, 215, 215, 0.3);
+}
+
+#cloud-mid {
+  top: 80px;
+  width: 100%;
+  height: 35px;
+  filter: url(#filter-mid);
+  box-shadow: 210px 250px 28px 30px rgba(66, 105, 146, 0.2);
+}
+
+#cloud-front {
+  top: 70px;
+  width: 77.5%;
+  height: 40px;
+  left: -20px;
+  filter: url(#filter-front);
+  box-shadow: 210px 272px 30px 0px rgba(0, 0, 0, 0.4);
 }

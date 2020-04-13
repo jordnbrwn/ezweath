@@ -10,7 +10,7 @@ class Weather extends Component {
           )}
           <sup>&deg;</sup>
         </h1>
-        <p>{this.props.conditions}</p>
+        <p>{this.props.conditions.toString().replace(/-/g, " ")}</p>
       </div>
     );
   }
