@@ -1,3 +1,8 @@
+html,
+body {
+  font-family: "Merrifweather";
+}
+
 .App {
   text-align: center;
 }
@@ -5,6 +10,53 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.App.night {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 17, 1) 0%,
+    rgba(67, 32, 87, 1) 100%
+  );
+}
+
+.App.rain {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 17, 1) 0%,
+    rgba(86, 78, 91, 1) 100%
+  );
+}
+
+.App.overcast {
+  background: linear-gradient(
+    180deg,
+    rgba(172, 172, 172, 1) 0%,
+    rgba(227, 239, 246, 1) 100%
+  );
+}
+
+.App.sunny,
+.App.partly-cloud {
+  background: linear-gradient(
+    180deg,
+    rgba(22, 185, 245, 1) 0%,
+    rgba(227, 242, 246, 1) 100%
+  );
+}
+
+.App.sunny:before {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60%;
+  height: 70vh;
+  opacity: 0.78;
+  background: radial-gradient(
+    circle,
+    rgba(252, 255, 0, 0.5) 0%,
+    rgba(252, 255, 0, 0) 100%
+  );
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -35,4 +87,132 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+html {
+  height: 100%;
+}
+
+.rain {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.rain.back-row {
+  display: none;
+  z-index: 1;
+  bottom: 60px;
+  opacity: 0.5;
+}
+
+body.back-row-toggle .rain.back-row {
+  display: block;
+}
+
+.drop {
+  position: absolute;
+  bottom: 100%;
+  width: 15px;
+  height: 120px;
+  pointer-events: none;
+  animation: drop 0.5s linear infinite;
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(0vh);
+  }
+  75% {
+    transform: translateY(90vh);
+  }
+  100% {
+    transform: translateY(90vh);
+  }
+}
+
+.stem {
+  width: 1px;
+  height: 60%;
+  margin-left: 7px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.5)
+  );
+  animation: stem 0.5s linear infinite;
+}
+
+.night .stem {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.25)
+  );
+}
+
+@keyframes stem {
+  0% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.splat {
+  width: 15px;
+  height: 10px;
+  border-top: 2px dotted rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  opacity: 1;
+  transform: scale(0);
+  animation: splat 0.5s linear infinite;
+  display: none;
+}
+
+@keyframes splat {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  90% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.weather {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Merriweather-Bold;
+  text-shadow: 0 2px 25px rgba(0, 0, 0, 0.29);
+  z-index: 9999;
+}
+.weather h1 {
+  font-size: 10rem;
+  margin-bottom: 0px;
+  line-height: 1;
+}
+.weather p {
+  font-size: 2rem;
 }
