@@ -72,7 +72,7 @@ class App extends Component {
       } else if (condition.id === 801) {
         return "partly-cloudy";
       } else if (condition.id === 802 || condition.id === 803) {
-        return "mostly-cloudy";
+        return "some-clouds";
       } else if (condition.id === 804) {
         return "overcast";
       } else {
@@ -87,7 +87,8 @@ class App extends Component {
     const sunRise = metadata.sunrise;
     let night = false;
 
-    night = today <= sunDown || today >= sunRise ? true : false;
+    night = today <= sunDown && today >= sunRise ? false : true;
+    console.log({ today: today, sunDown: sunDown, sunRise: sunRise });
 
     this.setState({
       night: night,
@@ -158,10 +159,16 @@ class App extends Component {
   }
 
   render() {
+    const weather = this.state.weather;
+    const night = this.state.night ? " night" : "";
     return (
-      <div className={`App ${this.state.weather}`}>
+      <div className={`App ${weather}${night}`}>
         <div className="rain front-row"></div>
         <div className="rain back-row"></div>
+        <div className="stars"></div>
+        <div className="twinkling"></div>
+        <div className="night-clouds"></div>
+
         <div className="clouds">
           <div className="cloud" id="cloud-base"></div>
           <div className="cloud" id="cloud-back"></div>
